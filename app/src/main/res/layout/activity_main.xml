@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="100dp"
+    tools:context="statistics.cb.com.test.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_click"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:text="click count" />
+</LinearLayout>

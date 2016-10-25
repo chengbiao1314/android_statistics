@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="statistics.cb.com.statistics">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <service android:name="statistics.cb.com.test.helper.UploadService"
+            android:enabled="true"
+            android:process=":remote"/>
+
+    </application>
+
+</manifest>
