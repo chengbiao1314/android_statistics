@@ -25,8 +25,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:24.2.1'
-//    provided files('libs/android-support-v4.jar')
-    compile files('libs/ormlite-android-4.48.jar')
-    compile files('libs/ormlite-core-4.48.jar')
+    //    compile 'com.android.support:appcompat-v7:24.2.1'
+    //    provided files('libs/android-support-v4.jar')
+    compile files('lib/gson-2.2.1.jar')
 }

@@ -1,14 +1,17 @@
-package statistics.cb.com.test.helper;
+package statistics.cb.com.test;
 
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import statistics.cb.com.test.bean.EventBean;
+import statistics.cb.com.test.db.dao.EventDao;
+import statistics.cb.com.test.util.JsonUtil;
 
 /**
  * 
@@ -18,12 +21,12 @@ import statistics.cb.com.test.bean.EventBean;
  * 
  */
 public class UploadService extends Service{
-	private EventDao dao;
 	private List<EventBean> list;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.v("statistics","Service->onCreate");
 		if(isUpload()){
 			upload(list);
 		}
@@ -31,31 +34,23 @@ public class UploadService extends Service{
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		System.out.println("Service->onBind");
+		Log.v("statistics","Service->onBind");
 		return null;
 	}
 
 	@Override
 	public ComponentName startService(Intent service) {
-		System.out.println("Service->startService");
+		Log.v("statistics","Service->startService");
 		return super.startService(service);
 	}
 
 	@Override
 	public void onDestroy() {
-		System.out.println("Service->onDestroy");
-		if (dao != null){
-			dao.closeDB();
-			dao = null;
-		}
+		Log.v("statistics","Service->onDestroy");
 		super.onDestroy();
 	}
 
 	private boolean isUpload(){
-		if(dao == null){
-			dao = new EventDao(this);
-		}
-
 		if(list == null){
 			list = new ArrayList<>();
 		}else{
@@ -63,28 +58,31 @@ public class UploadService extends Service{
 		}
 
 		/*** start 查询数据库确定需要上传的数据 **/
-		EventBean event = new EventBean();
-		list.add(event);
-
-
+		list = EventDao.getInstance(this).queryEventList(5);
 		/*** end 查询数据库确定需要上传的数据 **/
 
-		if(list.size() >0){
+		if(list != null && list.size() >0){
 			return true;
 		}else{
+			if(StatisticsHelper.isDebug){
+				Log.v("statistics","service-->  服务的查询结果为空");
+			}
 			return false;
 		}
 	}
 
 	private void upload(List<EventBean> list){
-		System.out.println("数据条数..." + dao.getSize() + "___" + list.size());
-
+		if(StatisticsHelper.isDebug){
+			Log.v("statistics","service-->  查询的数据长度" + list.size());
+			Log.v("statistics","service-->  查询结果：" + JsonUtil.getInstances().beanToJson(list));
+		}
 		try{
 			Thread.sleep(5000);
 		}catch(InterruptedException e){
 			System.out.println("线程异常...");
 		}
 
+		EventDao.getInstance(this).deleteData(5);
 		upload(list);
 	}
 }

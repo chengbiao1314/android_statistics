@@ -25,26 +25,24 @@ public class MainActivity extends Activity {
                 tv_click.setText("点击了" + id);
 
                 //事件统计
-                StatisticsHelper.getInstance().StatisticsEvent(MainActivity.this ,"event"+id ,null);
+                StatisticsHelper.getInstance().AddEvent(MainActivity.this ,"event"+id ,null);
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        StatisticsHelper.getInstance().stopStatistics(this);
         super.onDestroy();
+        StatisticsHelper.getInstance().closeStatistics(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        StatisticsHelper.getInstance().onPause(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StatisticsHelper.getInstance().onResume(this);
     }
 }
