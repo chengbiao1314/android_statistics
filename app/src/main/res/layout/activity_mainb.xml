@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:text="Event A" />
+        android:text="Event C" />
 
     <TextView
         android:id="@+id/tv_click2"
@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:text="Event B" />
+        android:text="Event D" />
 
     <TextView
         android:id="@+id/tv_click3"
@@ -38,5 +38,5 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:text="进入B界面" />
+        android:text="返回A界面" />
 </LinearLayout>

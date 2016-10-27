@@ -1,6 +1,9 @@
 package statistics.cb.com.test;
 
 import android.content.Context;
+
+import com.google.gson.Gson;
+
 import java.util.Map;
 
 import statistics.cb.com.test.bean.EventBean;
@@ -27,6 +30,12 @@ public class AddEventThread implements Runnable {
         event.setDevices_model("型号：" + android.os.Build.MODEL);//手机型号
         event.setSystem_version("系统版本："+ android.os.Build.VERSION.RELEASE);//系统版本
         event.setEvent_id(eventId);
+        if(map != null){
+            Gson gson = new Gson();
+
+            event.setEvent_param(gson.toJson(map));
+//            event.setEvent_param(map.toString());
+        }
 
         EventDao.getInstance(context).insertData(event);
     }

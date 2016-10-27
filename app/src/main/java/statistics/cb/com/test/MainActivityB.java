@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends Activity {
+public class MainActivityB extends Activity {
     private TextView tv_click;
     private TextView tv_click2;
     private TextView tv_click3;
@@ -21,7 +19,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainb);
 
         tv_click = (TextView) findViewById(R.id.tv_click);
         tv_click2 = (TextView) findViewById(R.id.tv_click2);
@@ -30,20 +28,20 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 id++;
-                tv_click.setText("事件A点击了" + id);
+                tv_click.setText("事件C点击了" + id);
 
                 //事件统计
-                StatisticsHelper.getInstance().AddEvent(MainActivity.this ,"eventA"+id ,null);
+                StatisticsHelper.getInstance().AddEvent(MainActivityB.this ,"eventA"+id ,null);
             }
         });
         tv_click2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 idb++;
-                tv_click2.setText("事件B点击了" + idb);
+                tv_click2.setText("事件D点击了" + idb);
 
                 //事件统计
-                StatisticsHelper.getInstance().AddEvent(MainActivity.this ,"eventB"+idb ,null);
+                StatisticsHelper.getInstance().AddEvent(MainActivityB.this ,"eventB"+idb ,null);
             }
         });
         tv_click3.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +49,12 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 //事件统计
                 Map<String, Object> map = new HashMap();
-                map.put("param1","11111");
-                map.put("param2","22222");
-                map.put("param3","33333");
-                StatisticsHelper.getInstance().AddEvent(MainActivity.this ,"event_to_b"+idb ,map);
+                map.put("param1b","11111b");
+                map.put("param2b","22222b");
+                map.put("param3b","33333b");
+                StatisticsHelper.getInstance().AddEvent(MainActivityB.this ,"event_back_a"+idb ,map);
 
-                Gson gson = new Gson();
-                System.out.println(gson.toJson(map));
-
-                Intent intent = new Intent(MainActivity.this,MainActivityB.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

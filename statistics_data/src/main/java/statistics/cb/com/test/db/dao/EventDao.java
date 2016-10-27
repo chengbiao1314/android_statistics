@@ -13,7 +13,6 @@ import statistics.cb.com.test.StatisticsHelper;
 import statistics.cb.com.test.bean.EventBean;
 import statistics.cb.com.test.db.DBManager;
 import statistics.cb.com.test.db.FieldColumns;
-import statistics.cb.com.test.util.JsonUtil;
 
 /**
  * Created by Ricky on 2016/10/26.
@@ -119,10 +118,5 @@ public class EventDao {
         valus.put(FieldColumns.Reserved_Field,eventBean.getReserved_field());
 
         database.insert(FieldColumns.TableName_Event,null,valus);
-
-        if (StatisticsHelper.isDebug){
-            Log.v("statistics","EventDao-->  查询结果：" + JsonUtil.getInstances().beanToJson(EventDao.getInstance(context).queryEventList(5)));
-//            deleteData(5);
-        }
     }
 }

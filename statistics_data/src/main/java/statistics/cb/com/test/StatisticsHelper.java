@@ -2,7 +2,6 @@ package statistics.cb.com.test;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.Map;
 
@@ -29,10 +28,10 @@ public class StatisticsHelper {
      */
     public void initStatistics(Context context){
         indextime = System.currentTimeMillis();
-        new Thread(new UploadEventThread(context)).start();
+//        new Thread(new UploadEventThread(context)).start();
 
-//        Intent intent = new Intent(context, UploadService.class);
-//        context.startService(intent);
+        Intent intent = new Intent(context, UploadService.class);
+        context.startService(intent);
     }
 
     /**
